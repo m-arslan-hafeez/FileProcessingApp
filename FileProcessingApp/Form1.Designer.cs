@@ -169,8 +169,10 @@
             // 
             // rtbShow
             // 
-            this.rtbShow.BackColor = System.Drawing.SystemColors.Info;
-            this.rtbShow.Location = new System.Drawing.Point(16, 246);
+            this.rtbShow.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.rtbShow.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbShow.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbShow.Location = new System.Drawing.Point(20, 246);
             this.rtbShow.Name = "rtbShow";
             this.rtbShow.Size = new System.Drawing.Size(488, 214);
             this.rtbShow.TabIndex = 14;
@@ -269,6 +271,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.ClientSize = new System.Drawing.Size(531, 496);
             this.Controls.Add(this.cbOptions);
             this.Controls.Add(this.btnShow);
@@ -291,9 +295,13 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnLibrary);
             this.Controls.Add(this.tbLibrary);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
             this.Name = "frmMain";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main Form";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Click += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);

@@ -13,12 +13,20 @@ namespace FileProcessingApp
 {
     public partial class frmMain : Form
     {
-        //const string DLL_PATH = "CipherLibrary.dll";
-        //[DllImport(DLL_PATH, CallingConvention = CallingConvention.Cdecl)]
-        //public static extern void getEncryptedResult(string inputFilePath, string outputFilePath, int key);
+        private IntPtr loadedLibraryHandle = IntPtr.Zero;
 
-        //[DllImport(DLL_PATH, CallingConvention = CallingConvention.Cdecl)]
-        //public static extern void getDecryptedResult(string inputFilePath, string outputFilePath, int key);
+        [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
+        private static extern IntPtr LoadLibrary(string lpFileName);
+        [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Ansi)]
+        private static extern IntPtr GetProcAddress(IntPtr hModule, string procName);
+
+        [DllImport("kernel32", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool FreeLibrary(IntPtr hModule);
+
+        // Define the delegate for the getEncryptedResult function
+        private delegate void GetEncryptedResultDelegate(string inputFilePath, string outputFilePath, int key);
+        private delegate void GetDecryptedResultDelegate(string inputFilePath, string outputFilePath, int key);
 
         public string inputFilePath;
         public string outputFilePath;
@@ -34,6 +42,7 @@ namespace FileProcessingApp
         public string file;
         public int userKey;
         public string text;
+        public static int cipher_key = 835294858;
 
         public frmMain()
         {
@@ -41,46 +50,107 @@ namespace FileProcessingApp
             button_text = btnEncDec.Text;
         }
 
-        static void getEncryptedResult(string inputFilePath, string outputFilePath, int key)
+        private void CallGetEncryptedResult(string inputFilePath, string outputFilePath, int key)
         {
-            try
+            if (loadedLibraryHandle != IntPtr.Zero)
             {
-                string content = File.ReadAllText(inputFilePath);
-                string encryptedContent = encryptFile(content, key);
-                File.WriteAllText(outputFilePath, encryptedContent);
+                // Get a delegate to the function from the loaded library
+                var getEncryptedResultDelegate = GetFunctionDelegate<GetEncryptedResultDelegate>("getEncryptedResult");
+
+                if (getEncryptedResultDelegate != null)
+                {
+                    // Call the function using the delegate
+                    getEncryptedResultDelegate(inputFilePath, outputFilePath, key);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to get function delegate.", "Function Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("An error occurred: " + ex.Message);
+                MessageBox.Show("DLL is not loaded.", "DLL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        private void CallGetDecryptedResult(string inputFilePath, string outputFilePath, int key)
+        {
+            if (loadedLibraryHandle != IntPtr.Zero)
+            {
+                // Get a delegate to the function from the loaded library
+                var getDecryptedResultDelegate = GetFunctionDelegate<GetDecryptedResultDelegate>("getDecryptedResult");
+
+                if (getDecryptedResultDelegate != null)
+                {
+                    // Call the function using the delegate
+                    getDecryptedResultDelegate(inputFilePath, outputFilePath, key);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to get function delegate.", "Function Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("DLL is not loaded.", "DLL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Function to get a delegate to a function from the loaded library
+        private TDelegateType GetFunctionDelegate<TDelegateType>(string functionName)
+            where TDelegateType : Delegate
+        {
+            if (loadedLibraryHandle != IntPtr.Zero)
+            {
+                IntPtr functionPointer = GetProcAddress(loadedLibraryHandle, functionName);
+                if (functionPointer != IntPtr.Zero)
+                {
+                    return Marshal.GetDelegateForFunctionPointer<TDelegateType>(functionPointer);
+                }
+            }
+            return null;
+        }
+
+        //static void getEncryptedResult(string inputFilePath, string outputFilePath, int key)
+        //{
+        //    try
+        //    {
+        //        string content = File.ReadAllText(inputFilePath);
+        //        string encryptedContent = encryptFile(content, key);
+        //        File.WriteAllText(outputFilePath, encryptedContent);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("An error occurred: " + ex.Message);
+        //    }
+        //}
+
         static string encryptFile(string input, int key)
         {
-
+            
             char[] chars = input.ToCharArray();
             for (int i = 0; i < chars.Length; i++)
             {
                 char c = chars[i];
-                c = (char)((c + key - 100929));
+                c = (char)((c + key + cipher_key));
                 chars[i] = c;
             }
             return new string(chars);
         }
 
-        static void getDecryptedResult(string inputFilePath, string outputFilePath, int key)
-        {
-            try
-            {
-                string content = File.ReadAllText(inputFilePath);
-                string encryptedContent = decryptFile(content, key);
-                File.WriteAllText(outputFilePath, encryptedContent);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
-        }
+        //static void getDecryptedResult(string inputFilePath, string outputFilePath, int key)
+        //{
+        //    try
+        //    {
+        //        string content = File.ReadAllText(inputFilePath);
+        //        string encryptedContent = decryptFile(content, key);
+        //        File.WriteAllText(outputFilePath, encryptedContent);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("An error occurred: " + ex.Message);
+        //    }
+        //}
 
         static string decryptFile(string input, int key)
         {
@@ -89,7 +159,7 @@ namespace FileProcessingApp
             for (int i = 0; i < chars.Length; i++)
             {
                 char c = chars[i];
-                c = (char)((c - key + 100929));
+                c = (char)((c - key - cipher_key));
                 chars[i] = c;
             }
             return new string(chars);
@@ -175,13 +245,25 @@ namespace FileProcessingApp
         {
             using (var openFileDialog = new OpenFileDialog())
             {
+                openFileDialog.Filter = "Libraries|*.dll";
+
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    dllLibrary = openFileDialog.FileName;
-                    tbLibrary.Text = dllLibrary;
+                    string dllPath = openFileDialog.FileName;
+                    loadedLibraryHandle = LoadLibrary(dllPath);
+
+                    if (loadedLibraryHandle != IntPtr.Zero)
+                    {
+                        tbLibrary.Text = dllPath;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to load the DLL.", "DLL Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
+
         private void btnFile_Click(object sender, EventArgs e)
         {
             tbLibrary.Clear();
@@ -299,14 +381,12 @@ namespace FileProcessingApp
 
             file = tbFile.Text;
             text = tbText.Text;
-            //library = tbLibrary.Text;
-            //if (string.IsNullOrEmpty(library))
-            //{
-            //    MessageBox.Show("Select library first!");
-            //}
-            //else 
-
-            if (string.IsNullOrEmpty(file) && string.IsNullOrEmpty(text))
+            library = tbLibrary.Text;
+            if (string.IsNullOrEmpty(library))
+            {
+                MessageBox.Show("Select library first!");
+            }
+            else if (string.IsNullOrEmpty(file) && string.IsNullOrEmpty(text))
             {
                 MessageBox.Show("Select file or enter text first!");
             }
@@ -320,12 +400,12 @@ namespace FileProcessingApp
                 {
                     if (btnEncDec.Text == "Encrypt")
                     {
-                        getEncryptedResult(inputFilePath, outputFilePath, userKey);
+                        CallGetEncryptedResult(inputFilePath, outputFilePath, userKey);
                         MessageBox.Show("File encrypted and saved successfully!");
                     }
                     if (btnEncDec.Text == "Decrypt")
                     {
-                        getDecryptedResult(inputFilePath, outputFilePath, userKey);
+                        CallGetDecryptedResult(inputFilePath, outputFilePath, userKey);
                         MessageBox.Show("File decrypted and saved successfully!");
                     }
                 }
@@ -376,6 +456,14 @@ namespace FileProcessingApp
                 btnEncDec.Text = cbOptions.SelectedItem.ToString();
             }
 
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (loadedLibraryHandle != IntPtr.Zero)
+            {
+                FreeLibrary(loadedLibraryHandle);
+            }
         }
     }
 }
