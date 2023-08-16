@@ -28,6 +28,9 @@ namespace FileProcessingApp
         private delegate void GetEncryptedResultDelegate(string inputFilePath, string outputFilePath, int key);
         private delegate void GetDecryptedResultDelegate(string inputFilePath, string outputFilePath, int key);
 
+        private delegate string GetEncryptedTextDelegate(string text, int key);
+        private delegate string GetDecryptedTextDelegate(string text, int key);
+
         public string inputFilePath;
         public string outputFilePath;
         public string showInputFilePath;
@@ -40,8 +43,9 @@ namespace FileProcessingApp
         public string file_name;
         public string library;
         public string file;
-        public int userKey;
-        public string text;
+        public int user_key;
+        public string user_text;
+        string text_result;
         public static int cipher_key = 835294858;
 
         public frmMain()
@@ -49,6 +53,54 @@ namespace FileProcessingApp
             InitializeComponent();
             button_text = btnEncDec.Text;
         }
+
+        //private string CallGetEncryptedText(string text, int key)
+        //{
+        //    if (loadedLibraryHandle != IntPtr.Zero)
+        //    {
+        //        // Get a delegate to the function from the loaded library
+        //        var getEncryptedTextDelegate = GetFunctionDelegate<GetEncryptedTextDelegate>("encryptFile");
+
+        //        if (getEncryptedTextDelegate != null)
+        //        {
+        //            // Call the function using the delegate
+        //            text_result = getEncryptedTextDelegate(text, key);
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Failed to get function delegate.", "Function Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("DLL is not loaded.", "DLL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //    return text_result;
+        //}
+
+        //private string CallGetDecryptedText(string text, int key)
+        //{
+        //    if (loadedLibraryHandle != IntPtr.Zero)
+        //    {
+        //        // Get a delegate to the function from the loaded library
+        //        var getDecryptedTextDelegate = GetFunctionDelegate<GetDecryptedTextDelegate>("decryptFile");
+
+        //        if (getDecryptedTextDelegate != null)
+        //        {
+        //            // Call the function using the delegate
+        //            text_result = getDecryptedTextDelegate(text, key);
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Failed to get function delegate.", "Function Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("DLL is not loaded.", "DLL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //    return text_result;
+        //}
 
         private void CallGetEncryptedResult(string inputFilePath, string outputFilePath, int key)
         {
@@ -111,23 +163,9 @@ namespace FileProcessingApp
             return null;
         }
 
-        //static void getEncryptedResult(string inputFilePath, string outputFilePath, int key)
-        //{
-        //    try
-        //    {
-        //        string content = File.ReadAllText(inputFilePath);
-        //        string encryptedContent = encryptFile(content, key);
-        //        File.WriteAllText(outputFilePath, encryptedContent);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("An error occurred: " + ex.Message);
-        //    }
-        //}
-
         static string encryptFile(string input, int key)
         {
-            
+
             char[] chars = input.ToCharArray();
             for (int i = 0; i < chars.Length; i++)
             {
@@ -137,20 +175,6 @@ namespace FileProcessingApp
             }
             return new string(chars);
         }
-
-        //static void getDecryptedResult(string inputFilePath, string outputFilePath, int key)
-        //{
-        //    try
-        //    {
-        //        string content = File.ReadAllText(inputFilePath);
-        //        string encryptedContent = decryptFile(content, key);
-        //        File.WriteAllText(outputFilePath, encryptedContent);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("An error occurred: " + ex.Message);
-        //    }
-        //}
 
         static string decryptFile(string input, int key)
         {
@@ -270,7 +294,6 @@ namespace FileProcessingApp
             tbFile.Clear();
             tbKey.Clear();
             rtbShow.Clear();
-            btnEncDec.Text = "Encrypt/Decrypt";
             using (var openFileDialog = new OpenFileDialog())
             {
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -282,10 +305,12 @@ namespace FileProcessingApp
 
                     if (inputFileExtension == ".enc")
                     {
+                        btnEncDec.Visible = true;
                         btnEncDec.Text = "Decrypt";
                     }
                     else
                     {
+                        btnEncDec.Visible = true;
                         btnEncDec.Text = "Encrypt";
                     }
                 }
@@ -327,14 +352,13 @@ namespace FileProcessingApp
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            
+            chBoxShow.Checked = true;
         }
 
         private void optFile_CheckedChanged(object sender, EventArgs e)
         {
             if (optFile.Checked == true)
             {
-                btnEncDec.Text = "Encrypt/Decrypt";
                 lblText.Visible = false;
                 tbText.Visible = false;
                 cbOptions.Visible = false;
@@ -377,35 +401,35 @@ namespace FileProcessingApp
 
         private void btnEncDec_Click(object sender, EventArgs e)
         {
-            userKey = Convert.ToInt32(tbKey.Text);
+            user_key = Convert.ToInt32(tbKey.Text);
 
             file = tbFile.Text;
-            text = tbText.Text;
+            user_text = tbText.Text;
             library = tbLibrary.Text;
             if (string.IsNullOrEmpty(library))
             {
                 MessageBox.Show("Select library first!");
             }
-            else if (string.IsNullOrEmpty(file) && string.IsNullOrEmpty(text))
+            else if (string.IsNullOrEmpty(file) && string.IsNullOrEmpty(user_text))
             {
                 MessageBox.Show("Select file or enter text first!");
             }
-            else if (userKey.Equals(null))
+            else if (user_key.Equals(null))
             {
                 MessageBox.Show("Please enter key!");
             }
             else
             {
-                if (string.IsNullOrEmpty(text))
+                if (string.IsNullOrEmpty(user_text))
                 {
                     if (btnEncDec.Text == "Encrypt")
                     {
-                        CallGetEncryptedResult(inputFilePath, outputFilePath, userKey);
+                        CallGetEncryptedResult(inputFilePath, outputFilePath, user_key);
                         MessageBox.Show("File encrypted and saved successfully!");
                     }
                     if (btnEncDec.Text == "Decrypt")
                     {
-                        CallGetDecryptedResult(inputFilePath, outputFilePath, userKey);
+                        CallGetDecryptedResult(inputFilePath, outputFilePath, user_key);
                         MessageBox.Show("File decrypted and saved successfully!");
                     }
                 }
@@ -413,7 +437,8 @@ namespace FileProcessingApp
                 {
                     if (btnEncDec.Text == "Encrypt")
                     {
-                        string contents = encryptFile(text, userKey);
+                        //string contents = CallGetEncryptedText(user_text, userKey);
+                        string contents = encryptFile(user_text, user_key);
                         rtbShow.Text = contents;
                         tbText.Clear();
                         tbKey.Clear();
@@ -421,7 +446,8 @@ namespace FileProcessingApp
                     }
                     if (btnEncDec.Text == "Decrypt")
                     {
-                        string contents = decryptFile(text, userKey);
+                        //string contents = CallGetDecryptedText(user_text, userKey);
+                        string contents = decryptFile(user_text, user_key);
                         rtbShow.Text = contents;
                         tbText.Clear();
                         tbKey.Clear();
@@ -436,7 +462,7 @@ namespace FileProcessingApp
             tbFile.Clear();
             tbText.Clear();
             tbKey.Clear();
-            btnEncDec.Text = "Encrypt/Decrypt";
+            btnEncDec.Visible = false;
             rtbShow.Clear();
             tbOutputFile.Clear();
         }
@@ -449,10 +475,12 @@ namespace FileProcessingApp
         private void cbOptions_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbOptions.SelectedIndex == 0) {
+                btnEncDec.Visible = true;
                 btnEncDec.Text = cbOptions.SelectedItem.ToString();
             }
             if (cbOptions.SelectedIndex == 1)
             {
+                btnEncDec.Visible = true;
                 btnEncDec.Text = cbOptions.SelectedItem.ToString();
             }
 
@@ -464,6 +492,12 @@ namespace FileProcessingApp
             {
                 FreeLibrary(loadedLibraryHandle);
             }
+        }
+
+        private void chBoxShow_CheckedChanged(object sender, EventArgs e)
+        {
+            // Toggle password visibility based on CheckBox state
+            tbKey.UseSystemPasswordChar = !chBoxShow.Checked;
         }
     }
 }
