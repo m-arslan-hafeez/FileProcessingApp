@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using iTextSharp.text.pdf;
-using System.Text;
 using Microsoft.Office.Interop.Word;
-using iTextSharp.text.pdf.parser;
 using Document = Microsoft.Office.Interop.Word.Document;
 using Path = System.IO.Path;
 using System.Runtime.InteropServices;
@@ -53,8 +50,6 @@ namespace FileProcessingApp
             InitializeComponent();
             button_text = btnEncDec.Text;
         }
-
-
 
         private void CallGetEncryptedResult(string inputFilePath, string outputFilePath, int key)
         {
@@ -139,22 +134,11 @@ namespace FileProcessingApp
             }
             return new string(chars);
         }
-        public void UpdateRichTextBox(string textIn)
-        {
-            if (rtbShow.InvokeRequired)
-            {
-                rtbShow.Invoke(new Action<string>(UpdateRichTextBox), textIn);
-            }
-            else
-            {
-                rtbShow.AppendText(textIn);
-            }
-        }
         public void openResultFile(string file_path) {
             try
             {
                 string encryptedContent = File.ReadAllText(file_path);
-                rtbShow.Text = encryptedContent;
+//                rtbShow.Text = encryptedContent;
             }
             catch (Exception ex)
             {
@@ -166,8 +150,8 @@ namespace FileProcessingApp
             Microsoft.Office.Interop.Word.Application wordApp = new Microsoft.Office.Interop.Word.Application();
             Document doc = wordApp.Documents.Add();
             Range range = doc.Content;
-            string richTextBoxText = rtbShow.Text;
-            range.Text = richTextBoxText;
+//            string richTextBoxText = rtbShow.Text;
+//            range.Text = richTextBoxText;
             doc.SaveAs2(filePath);
             doc.Close();
             wordApp.Quit();
@@ -203,7 +187,7 @@ namespace FileProcessingApp
             tbLibrary.Clear();
             tbFile.Clear();
             tbKey.Clear();
-            rtbShow.Clear();
+//            rtbShow.Clear();
             using (var openFileDialog = new OpenFileDialog())
             {
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -328,12 +312,12 @@ namespace FileProcessingApp
                         else
                         {
                             this.Size = new Size(630, 657);
-                            rtbShow.Visible = true;
-                            rtbShow.Size = new Size(558, 243);
+//                            rtbShow.Visible = true;
+//                            rtbShow.Size = new Size(558, 243);
                             btnClear.Visible = false;
                             btnClearAll.Visible = true;
                             btnExport.Visible = true;
-                            rtbShow.Text = contents;
+//                            rtbShow.Text = contents;
                             tbText.Clear();
                             tbKey.Clear();
                             MessageBox.Show("Contents encrypted successfully!");
@@ -348,12 +332,12 @@ namespace FileProcessingApp
                         else
                         {
                             this.Size = new Size(630, 657);
-                            rtbShow.Visible = true;
-                            rtbShow.Size = new Size(558, 243);
+//                            rtbShow.Visible = true;
+//                            rtbShow.Size = new Size(558, 243);
                             btnClear.Visible = false;
                             btnClearAll.Visible = true;
                             btnExport.Visible = true;
-                            rtbShow.Text = contents;
+//                            rtbShow.Text = contents;
                             tbText.Clear();
                             tbKey.Clear();
                             MessageBox.Show("Contents decrypted successfully!");
@@ -369,15 +353,15 @@ namespace FileProcessingApp
             tbText.Clear();
             tbKey.Clear();
             btnEncDec.Visible = false;
-            rtbShow.Clear();
+//            rtbShow.Clear();
             tbOutputFile.Clear();
         }
 
         private void btnShow_Click(object sender, EventArgs e)
         {
             this.Size = new Size(630, 657);
-            rtbShow.Visible = true;
-            rtbShow.Size = new Size(558, 243);
+//            rtbShow.Visible = true;
+//            rtbShow.Size = new Size(558, 243);
             btnClear.Visible = false;
             openResultFile(outputFilePath);
             btnClearAll.Visible = true;
@@ -414,7 +398,7 @@ namespace FileProcessingApp
             this.Size = new Size(630, 354);
             btnClearAll.Visible = false;
             btnExport.Visible = false;
-            rtbShow.Visible = false;
+//            rtbShow.Visible = false;
             tbLibrary.Clear();
             optFile.Checked = false;
             optText.Checked = false;
@@ -443,7 +427,7 @@ namespace FileProcessingApp
             tbText.Clear();
             tbKey.Clear();
             btnEncDec.Visible = false;
-            rtbShow.Clear();
+//            rtbShow.Clear();
             tbOutputFile.Clear();
         }
     }

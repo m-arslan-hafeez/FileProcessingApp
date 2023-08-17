@@ -1,4 +1,5 @@
 //Open selective file according to their extension
+
 //functions
  public void openPdfFile(string file_path){
             using (PdfReader reader = new PdfReader(file_path))
@@ -60,3 +61,21 @@
                     MessageBox.Show("File type not matched!");
                     break;
             }
+
+
+//RichTextBox using in application to show result
+
+//Function to append contents
+ public void UpdateRichTextBox(string textIn)
+        {
+            if (rtbShow.InvokeRequired)
+            {
+                rtbShow.Invoke(new Action<string>(UpdateRichTextBox), textIn);
+            }
+            else
+            {
+                rtbShow.AppendText(textIn);
+            }
+        }
+
+//calling

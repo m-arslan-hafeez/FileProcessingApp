@@ -38,7 +38,6 @@
             this.tbKey = new System.Windows.Forms.TextBox();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnEncDec = new System.Windows.Forms.Button();
-            this.rtbShow = new System.Windows.Forms.RichTextBox();
             this.optFile = new System.Windows.Forms.RadioButton();
             this.optText = new System.Windows.Forms.RadioButton();
             this.lblFile = new System.Windows.Forms.Label();
@@ -58,7 +57,7 @@
             // tbLibrary
             // 
             this.tbLibrary.BackColor = System.Drawing.SystemColors.Window;
-            this.tbLibrary.Location = new System.Drawing.Point(136, 42);
+            this.tbLibrary.Location = new System.Drawing.Point(136, 17);
             this.tbLibrary.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbLibrary.Name = "tbLibrary";
             this.tbLibrary.ReadOnly = true;
@@ -68,7 +67,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 47);
+            this.label1.Location = new System.Drawing.Point(17, 22);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 15);
@@ -78,7 +77,7 @@
             // tbFile
             // 
             this.tbFile.BackColor = System.Drawing.SystemColors.Window;
-            this.tbFile.Location = new System.Drawing.Point(136, 121);
+            this.tbFile.Location = new System.Drawing.Point(136, 96);
             this.tbFile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbFile.Name = "tbFile";
             this.tbFile.ReadOnly = true;
@@ -89,7 +88,7 @@
             // lblText
             // 
             this.lblText.AutoSize = true;
-            this.lblText.Location = new System.Drawing.Point(17, 125);
+            this.lblText.Location = new System.Drawing.Point(17, 100);
             this.lblText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblText.Name = "lblText";
             this.lblText.Size = new System.Drawing.Size(66, 15);
@@ -99,7 +98,7 @@
             // 
             // tbText
             // 
-            this.tbText.Location = new System.Drawing.Point(136, 107);
+            this.tbText.Location = new System.Drawing.Point(136, 82);
             this.tbText.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbText.Multiline = true;
             this.tbText.Name = "tbText";
@@ -111,7 +110,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 216);
+            this.label4.Location = new System.Drawing.Point(17, 191);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(34, 15);
@@ -121,7 +120,7 @@
             // tbKey
             // 
             this.tbKey.BackColor = System.Drawing.SystemColors.Window;
-            this.tbKey.Location = new System.Drawing.Point(136, 211);
+            this.tbKey.Location = new System.Drawing.Point(136, 186);
             this.tbKey.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbKey.Name = "tbKey";
             this.tbKey.Size = new System.Drawing.Size(239, 21);
@@ -129,7 +128,7 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(515, 576);
+            this.btnExport.Location = new System.Drawing.Point(410, 251);
             this.btnExport.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(67, 27);
@@ -141,7 +140,7 @@
             // 
             // btnEncDec
             // 
-            this.btnEncDec.Location = new System.Drawing.Point(465, 210);
+            this.btnEncDec.Location = new System.Drawing.Point(465, 185);
             this.btnEncDec.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnEncDec.Name = "btnEncDec";
             this.btnEncDec.Size = new System.Drawing.Size(88, 25);
@@ -151,23 +150,10 @@
             this.btnEncDec.Visible = false;
             this.btnEncDec.Click += new System.EventHandler(this.btnEncDec_Click);
             // 
-            // rtbShow
-            // 
-            this.rtbShow.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.rtbShow.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtbShow.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbShow.Location = new System.Drawing.Point(24, 327);
-            this.rtbShow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.rtbShow.Name = "rtbShow";
-            this.rtbShow.Size = new System.Drawing.Size(558, 243);
-            this.rtbShow.TabIndex = 14;
-            this.rtbShow.Text = "";
-            this.rtbShow.Visible = false;
-            // 
             // optFile
             // 
             this.optFile.AutoSize = true;
-            this.optFile.Location = new System.Drawing.Point(136, 81);
+            this.optFile.Location = new System.Drawing.Point(136, 56);
             this.optFile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.optFile.Name = "optFile";
             this.optFile.Size = new System.Drawing.Size(49, 19);
@@ -179,7 +165,7 @@
             // optText
             // 
             this.optText.AutoSize = true;
-            this.optText.Location = new System.Drawing.Point(327, 81);
+            this.optText.Location = new System.Drawing.Point(327, 56);
             this.optText.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.optText.Name = "optText";
             this.optText.Size = new System.Drawing.Size(52, 19);
@@ -191,7 +177,7 @@
             // lblFile
             // 
             this.lblFile.AutoSize = true;
-            this.lblFile.Location = new System.Drawing.Point(17, 126);
+            this.lblFile.Location = new System.Drawing.Point(17, 101);
             this.lblFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFile.Name = "lblFile";
             this.lblFile.Size = new System.Drawing.Size(79, 15);
@@ -202,7 +188,7 @@
             // lblOutputFile
             // 
             this.lblOutputFile.AutoSize = true;
-            this.lblOutputFile.Location = new System.Drawing.Point(17, 254);
+            this.lblOutputFile.Location = new System.Drawing.Point(17, 229);
             this.lblOutputFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOutputFile.Name = "lblOutputFile";
             this.lblOutputFile.Size = new System.Drawing.Size(81, 15);
@@ -213,7 +199,7 @@
             // tbOutputFile
             // 
             this.tbOutputFile.BackColor = System.Drawing.SystemColors.Window;
-            this.tbOutputFile.Location = new System.Drawing.Point(136, 247);
+            this.tbOutputFile.Location = new System.Drawing.Point(136, 222);
             this.tbOutputFile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbOutputFile.Name = "tbOutputFile";
             this.tbOutputFile.Size = new System.Drawing.Size(416, 21);
@@ -222,7 +208,7 @@
             // 
             // btnShow
             // 
-            this.btnShow.Location = new System.Drawing.Point(485, 276);
+            this.btnShow.Location = new System.Drawing.Point(485, 251);
             this.btnShow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(67, 27);
@@ -239,7 +225,7 @@
             this.cbOptions.Items.AddRange(new object[] {
             "Decrypt",
             "Encrypt"});
-            this.cbOptions.Location = new System.Drawing.Point(423, 76);
+            this.cbOptions.Location = new System.Drawing.Point(423, 51);
             this.cbOptions.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbOptions.MaxDropDownItems = 2;
             this.cbOptions.Name = "cbOptions";
@@ -255,7 +241,7 @@
             this.chBoxShow.AutoSize = true;
             this.chBoxShow.Checked = true;
             this.chBoxShow.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chBoxShow.Location = new System.Drawing.Point(384, 213);
+            this.chBoxShow.Location = new System.Drawing.Point(384, 188);
             this.chBoxShow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chBoxShow.Name = "chBoxShow";
             this.chBoxShow.Size = new System.Drawing.Size(61, 19);
@@ -267,7 +253,7 @@
             // btnSaveOutput
             // 
             this.btnSaveOutput.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveOutput.Image")));
-            this.btnSaveOutput.Location = new System.Drawing.Point(561, 241);
+            this.btnSaveOutput.Location = new System.Drawing.Point(561, 216);
             this.btnSaveOutput.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveOutput.Name = "btnSaveOutput";
             this.btnSaveOutput.Padding = new System.Windows.Forms.Padding(0, 0, 7, 0);
@@ -280,7 +266,7 @@
             // btnFile
             // 
             this.btnFile.Image = global::FileProcessingApp.Properties.Resources.icons8_add_file_24;
-            this.btnFile.Location = new System.Drawing.Point(561, 112);
+            this.btnFile.Location = new System.Drawing.Point(561, 87);
             this.btnFile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnFile.Name = "btnFile";
             this.btnFile.Size = new System.Drawing.Size(33, 33);
@@ -292,7 +278,7 @@
             // btnLibrary
             // 
             this.btnLibrary.Image = global::FileProcessingApp.Properties.Resources.icons8_dll_24;
-            this.btnLibrary.Location = new System.Drawing.Point(561, 36);
+            this.btnLibrary.Location = new System.Drawing.Point(561, 11);
             this.btnLibrary.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnLibrary.Name = "btnLibrary";
             this.btnLibrary.Size = new System.Drawing.Size(33, 33);
@@ -302,7 +288,7 @@
             // 
             // btnClearAll
             // 
-            this.btnClearAll.Location = new System.Drawing.Point(20, 576);
+            this.btnClearAll.Location = new System.Drawing.Point(20, 251);
             this.btnClearAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClearAll.Name = "btnClearAll";
             this.btnClearAll.Size = new System.Drawing.Size(97, 27);
@@ -314,7 +300,7 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(136, 276);
+            this.btnRefresh.Location = new System.Drawing.Point(136, 251);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(73, 27);
@@ -325,7 +311,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(217, 276);
+            this.btnClear.Location = new System.Drawing.Point(217, 251);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(74, 27);
@@ -340,7 +326,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.ClientSize = new System.Drawing.Size(614, 315);
+            this.ClientSize = new System.Drawing.Size(614, 432);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.chBoxShow);
@@ -351,7 +337,6 @@
             this.Controls.Add(this.tbOutputFile);
             this.Controls.Add(this.optText);
             this.Controls.Add(this.optFile);
-            this.Controls.Add(this.rtbShow);
             this.Controls.Add(this.btnClearAll);
             this.Controls.Add(this.btnEncDec);
             this.Controls.Add(this.btnExport);
@@ -399,7 +384,6 @@
         private System.Windows.Forms.Label lblOutputFile;
         private System.Windows.Forms.TextBox tbOutputFile;
         private System.Windows.Forms.Button btnSaveOutput;
-        public System.Windows.Forms.RichTextBox rtbShow;
         private System.Windows.Forms.Button btnShow;
         public System.Windows.Forms.Button btnEncDec;
         public System.Windows.Forms.ComboBox cbOptions;
