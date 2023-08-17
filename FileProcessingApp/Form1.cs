@@ -46,7 +46,6 @@ namespace FileProcessingApp
         public string file;
         public int user_key;
         public string user_text;
-        //string text_result;
         public static int cipher_key = 835294858;
 
         public frmMain()
@@ -55,53 +54,7 @@ namespace FileProcessingApp
             button_text = btnEncDec.Text;
         }
 
-        //private string CallGetEncryptedText(string text, int key)
-        //{
-        //    if (loadedLibraryHandle != IntPtr.Zero)
-        //    {
-        //        // Get a delegate to the function from the loaded library
-        //        var getEncryptedTextDelegate = GetFunctionDelegate<GetEncryptedTextDelegate>("encryptFile");
 
-        //        if (getEncryptedTextDelegate != null)
-        //        {
-        //            // Call the function using the delegate
-        //            text_result = getEncryptedTextDelegate(text, key);
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Failed to get function delegate.", "Function Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("DLL is not loaded.", "DLL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //    return text_result;
-        //}
-
-        //private string CallGetDecryptedText(string text, int key)
-        //{
-        //    if (loadedLibraryHandle != IntPtr.Zero)
-        //    {
-        //        // Get a delegate to the function from the loaded library
-        //        var getDecryptedTextDelegate = GetFunctionDelegate<GetDecryptedTextDelegate>("decryptFile");
-
-        //        if (getDecryptedTextDelegate != null)
-        //        {
-        //            // Call the function using the delegate
-        //            text_result = getDecryptedTextDelegate(text, key);
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Failed to get function delegate.", "Function Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("DLL is not loaded.", "DLL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //    return text_result;
-        //}
 
         private void CallGetEncryptedResult(string inputFilePath, string outputFilePath, int key)
         {
@@ -148,7 +101,6 @@ namespace FileProcessingApp
                 MessageBox.Show("DLL is not loaded.", "DLL Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         // Function to get a delegate to a function from the loaded library
         private TDelegateType GetFunctionDelegate<TDelegateType>(string functionName)
             where TDelegateType : Delegate
@@ -163,7 +115,6 @@ namespace FileProcessingApp
             }
             return null;
         }
-
         static string encryptFile(string input, int key)
         {
 
@@ -176,7 +127,6 @@ namespace FileProcessingApp
             }
             return new string(chars);
         }
-
         static string decryptFile(string input, int key)
         {
 
@@ -189,7 +139,6 @@ namespace FileProcessingApp
             }
             return new string(chars);
         }
-
         public void UpdateRichTextBox(string textIn)
         {
             if (rtbShow.InvokeRequired)
@@ -201,46 +150,7 @@ namespace FileProcessingApp
                 rtbShow.AppendText(textIn);
             }
         }
-
-        public void openPdfFile(string file_path){
-            using (PdfReader reader = new PdfReader(file_path))
-            {
-                StringBuilder text = new StringBuilder();
-                for (int page = 1; page <= reader.NumberOfPages; page++)
-                {
-                    text.Append(PdfTextExtractor.GetTextFromPage(reader, page));
-                }
-
-                UpdateRichTextBox(text.ToString());
-            }
-        }
-
-        public void openTextFile(string file_path) {
-            string fileContents = File.ReadAllText(file_path);
-            UpdateRichTextBox(fileContents);
-        }
-
-        public void openWordFile(string file_path) {
-            var application = new Microsoft.Office.Interop.Word.Application();
-            var document = application.Documents.Open(file_path);
-            foreach (Table table in document.Tables)
-            {
-                foreach (Row row in table.Rows)
-                {
-                    foreach (Cell cell in row.Cells)
-                    {
-                        string cellText = cell.Range.Text;
-                        UpdateRichTextBox(cellText + "\t"); 
-                    }
-                    UpdateRichTextBox("\n"); 
-                }
-                UpdateRichTextBox("\n\n"); 
-            }
-            document.Close();
-            application.Quit();
-        }
-
-        public void openEncryptedFile(string file_path) {
+        public void openResultFile(string file_path) {
             try
             {
                 string encryptedContent = File.ReadAllText(file_path);
@@ -288,7 +198,6 @@ namespace FileProcessingApp
                 }
             }
         }
-
         private void btnFile_Click(object sender, EventArgs e)
         {
             tbLibrary.Clear();
@@ -317,7 +226,6 @@ namespace FileProcessingApp
                 }
             }
         }
-
         private void btnExport_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -328,12 +236,10 @@ namespace FileProcessingApp
                 ExportToWord(saveFileDialog.FileName);
             }
         }
-
         private void frmMain_Load(object sender, EventArgs e)
         {
             chBoxShow.Checked = true;
         }
-
         private void optFile_CheckedChanged(object sender, EventArgs e)
         {
             if (optFile.Checked == true)
@@ -347,9 +253,9 @@ namespace FileProcessingApp
                 lblOutputFile.Visible = true;
                 tbOutputFile.Visible = true;
                 btnSaveOutput.Visible = true;
+                btnShow.Visible = true;
             }
         }
-
         private void optText_CheckedChanged(object sender, EventArgs e)
         {
             if (optText.Checked == true)
@@ -360,6 +266,7 @@ namespace FileProcessingApp
                 lblOutputFile.Visible = false;
                 tbOutputFile.Visible = false;
                 btnSaveOutput.Visible = false;
+                btnShow.Visible = false;
                 lblText.Visible = true;
                 tbText.Visible = true;
                 cbOptions.Visible = true;
@@ -376,8 +283,6 @@ namespace FileProcessingApp
                 outputFileExtension = Path.GetExtension(outputFilePath);
             }
         }
-
-
         private void btnEncDec_Click(object sender, EventArgs e)
         {
             user_key = Convert.ToInt32(tbKey.Text);
@@ -416,26 +321,48 @@ namespace FileProcessingApp
                 {
                     if (btnEncDec.Text == "Encrypt")
                     {
-                        //string contents = CallGetEncryptedText(user_text, userKey);
                         string contents = encryptFile(user_text, user_key);
-                        rtbShow.Text = contents;
-                        tbText.Clear();
-                        tbKey.Clear();
-                        MessageBox.Show("Contents encrypted successfully!");
+                        if (string.IsNullOrEmpty(contents)) {
+                            MessageBox.Show("Contents not encrypted!");
+                        }
+                        else
+                        {
+                            this.Size = new Size(630, 657);
+                            rtbShow.Visible = true;
+                            rtbShow.Size = new Size(558, 243);
+                            btnClear.Visible = false;
+                            btnClearAll.Visible = true;
+                            btnExport.Visible = true;
+                            rtbShow.Text = contents;
+                            tbText.Clear();
+                            tbKey.Clear();
+                            MessageBox.Show("Contents encrypted successfully!");
+                        }  
                     }
                     if (btnEncDec.Text == "Decrypt")
                     {
-                        //string contents = CallGetDecryptedText(user_text, userKey);
                         string contents = decryptFile(user_text, user_key);
-                        rtbShow.Text = contents;
-                        tbText.Clear();
-                        tbKey.Clear();
-                        MessageBox.Show("Contents decrypted successfully!");
+                        if (string.IsNullOrEmpty(contents)) {
+                            MessageBox.Show("Contents not decrypted!");
+                        }
+                        else
+                        {
+                            this.Size = new Size(630, 657);
+                            rtbShow.Visible = true;
+                            rtbShow.Size = new Size(558, 243);
+                            btnClear.Visible = false;
+                            btnClearAll.Visible = true;
+                            btnExport.Visible = true;
+                            rtbShow.Text = contents;
+                            tbText.Clear();
+                            tbKey.Clear();
+                            MessageBox.Show("Contents decrypted successfully!");
+                        }  
                     }
                 }  
             }
         }
-        private void btnClear_Click(object sender, EventArgs e)
+        private void btnClearAll_Click(object sender, EventArgs e)
         {
             tbLibrary.Clear();
             tbFile.Clear();
@@ -450,8 +377,11 @@ namespace FileProcessingApp
         {
             this.Size = new Size(630, 657);
             rtbShow.Visible = true;
-            rtbShow.Size = new Size(562, 260);
-            openEncryptedFile(outputFilePath);
+            rtbShow.Size = new Size(558, 243);
+            btnClear.Visible = false;
+            openResultFile(outputFilePath);
+            btnClearAll.Visible = true;
+            btnExport.Visible = true;
         }
 
         private void cbOptions_SelectedIndexChanged(object sender, EventArgs e)
@@ -467,7 +397,6 @@ namespace FileProcessingApp
             }
 
         }
-
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (loadedLibraryHandle != IntPtr.Zero)
@@ -475,11 +404,47 @@ namespace FileProcessingApp
                 FreeLibrary(loadedLibraryHandle);
             }
         }
-
         private void chBoxShow_CheckedChanged(object sender, EventArgs e)
         {
-            // Toggle password visibility based on CheckBox state
             tbKey.UseSystemPasswordChar = !chBoxShow.Checked;
+        }
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            this.Refresh();
+            this.Size = new Size(630, 354);
+            btnClearAll.Visible = false;
+            btnExport.Visible = false;
+            rtbShow.Visible = false;
+            tbLibrary.Clear();
+            optFile.Checked = false;
+            optText.Checked = false;
+            tbFile.Clear();
+            tbText.Clear();
+            tbKey.Clear();
+            btnEncDec.Visible = false;
+            cbOptions.SelectedItem = null;
+            cbOptions.Text = "Select Option";
+            lblOutputFile.Visible = false;
+            tbOutputFile.Clear();
+            tbOutputFile.Visible = false;
+            btnSaveOutput.Visible = false;
+            lblFile.Visible = false;
+            tbFile.Visible = false;
+            lblText.Visible = false;
+            tbText.Visible = false;
+            btnFile.Visible = false;
+            cbOptions.Visible = false;
+            btnShow.Visible = false;
+        }
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            tbLibrary.Clear();
+            tbFile.Clear();
+            tbText.Clear();
+            tbKey.Clear();
+            btnEncDec.Visible = false;
+            rtbShow.Clear();
+            tbOutputFile.Clear();
         }
     }
 }

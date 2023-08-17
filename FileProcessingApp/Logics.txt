@@ -1,4 +1,44 @@
+//Open selective file according to their extension
+//functions
+ public void openPdfFile(string file_path){
+            using (PdfReader reader = new PdfReader(file_path))
+            {
+                StringBuilder text = new StringBuilder();
+                for (int page = 1; page <= reader.NumberOfPages; page++)
+                {
+                    text.Append(PdfTextExtractor.GetTextFromPage(reader, page));
+                }
 
+                UpdateRichTextBox(text.ToString());
+            }
+        }
+
+        public void openTextFile(string file_path) {
+            string fileContents = File.ReadAllText(file_path);
+            UpdateRichTextBox(fileContents);
+        }
+
+        public void openWordFile(string file_path) {
+            var application = new Microsoft.Office.Interop.Word.Application();
+            var document = application.Documents.Open(file_path);
+            foreach (Table table in document.Tables)
+            {
+                foreach (Row row in table.Rows)
+                {
+                    foreach (Cell cell in row.Cells)
+                    {
+                        string cellText = cell.Range.Text;
+                        UpdateRichTextBox(cellText + "\t"); 
+                    }
+                    UpdateRichTextBox("\n"); 
+                }
+                UpdateRichTextBox("\n\n"); 
+            }
+            document.Close();
+            application.Quit();
+        }
+
+//call functions
             switch (inputFileExtension)
             {
                 case ".pdf":

@@ -50,6 +50,8 @@
             this.btnSaveOutput = new System.Windows.Forms.Button();
             this.btnFile = new System.Windows.Forms.Button();
             this.btnLibrary = new System.Windows.Forms.Button();
+            this.btnClearAll = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -127,13 +129,14 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(536, 276);
+            this.btnExport.Location = new System.Drawing.Point(515, 576);
             this.btnExport.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(67, 27);
             this.btnExport.TabIndex = 11;
             this.btnExport.Text = "Export";
             this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Visible = false;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnEncDec
@@ -156,6 +159,7 @@
             this.rtbShow.Location = new System.Drawing.Point(24, 327);
             this.rtbShow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rtbShow.Name = "rtbShow";
+            this.rtbShow.Size = new System.Drawing.Size(558, 243);
             this.rtbShow.TabIndex = 14;
             this.rtbShow.Text = "";
             this.rtbShow.Visible = false;
@@ -218,13 +222,14 @@
             // 
             // btnShow
             // 
-            this.btnShow.Location = new System.Drawing.Point(466, 276);
+            this.btnShow.Location = new System.Drawing.Point(485, 276);
             this.btnShow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(67, 27);
             this.btnShow.TabIndex = 21;
             this.btnShow.Text = "Show";
             this.btnShow.UseVisualStyleBackColor = true;
+            this.btnShow.Visible = false;
             this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
             // 
             // cbOptions
@@ -295,13 +300,36 @@
             this.btnLibrary.UseVisualStyleBackColor = true;
             this.btnLibrary.Click += new System.EventHandler(this.btnLibrary_Click);
             // 
+            // btnClearAll
+            // 
+            this.btnClearAll.Location = new System.Drawing.Point(20, 576);
+            this.btnClearAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnClearAll.Name = "btnClearAll";
+            this.btnClearAll.Size = new System.Drawing.Size(97, 27);
+            this.btnClearAll.TabIndex = 13;
+            this.btnClearAll.Text = "Clear All";
+            this.btnClearAll.UseVisualStyleBackColor = true;
+            this.btnClearAll.Visible = false;
+            this.btnClearAll.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(136, 276);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(73, 27);
+            this.btnRefresh.TabIndex = 25;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(99, 279);
+            this.btnClear.Location = new System.Drawing.Point(217, 276);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(67, 27);
-            this.btnClear.TabIndex = 13;
+            this.btnClear.Size = new System.Drawing.Size(74, 27);
+            this.btnClear.TabIndex = 26;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -312,7 +340,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.ClientSize = new System.Drawing.Size(614, 313);
+            this.ClientSize = new System.Drawing.Size(614, 315);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.chBoxShow);
             this.Controls.Add(this.cbOptions);
             this.Controls.Add(this.btnShow);
@@ -322,7 +352,7 @@
             this.Controls.Add(this.optText);
             this.Controls.Add(this.optFile);
             this.Controls.Add(this.rtbShow);
-            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnClearAll);
             this.Controls.Add(this.btnEncDec);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.label4);
@@ -374,6 +404,8 @@
         public System.Windows.Forms.Button btnEncDec;
         public System.Windows.Forms.ComboBox cbOptions;
         private System.Windows.Forms.CheckBox chBoxShow;
+        private System.Windows.Forms.Button btnClearAll;
+        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnClear;
     }
 }
