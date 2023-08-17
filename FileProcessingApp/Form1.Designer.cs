@@ -127,7 +127,7 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(555, 274);
+            this.btnExport.Location = new System.Drawing.Point(536, 276);
             this.btnExport.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(67, 27);
@@ -153,12 +153,12 @@
             this.rtbShow.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.rtbShow.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtbShow.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbShow.Location = new System.Drawing.Point(32, 310);
+            this.rtbShow.Location = new System.Drawing.Point(24, 327);
             this.rtbShow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rtbShow.Name = "rtbShow";
-            this.rtbShow.Size = new System.Drawing.Size(590, 247);
             this.rtbShow.TabIndex = 14;
             this.rtbShow.Text = "";
+            this.rtbShow.Visible = false;
             // 
             // optFile
             // 
@@ -218,7 +218,7 @@
             // 
             // btnShow
             // 
-            this.btnShow.Location = new System.Drawing.Point(485, 274);
+            this.btnShow.Location = new System.Drawing.Point(466, 276);
             this.btnShow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(67, 27);
@@ -248,6 +248,8 @@
             // chBoxShow
             // 
             this.chBoxShow.AutoSize = true;
+            this.chBoxShow.Checked = true;
+            this.chBoxShow.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoxShow.Location = new System.Drawing.Point(384, 213);
             this.chBoxShow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.chBoxShow.Name = "chBoxShow";
@@ -295,7 +297,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(118, 277);
+            this.btnClear.Location = new System.Drawing.Point(99, 279);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(67, 27);
@@ -310,7 +312,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.ClientSize = new System.Drawing.Size(708, 572);
+            this.ClientSize = new System.Drawing.Size(614, 313);
             this.Controls.Add(this.chBoxShow);
             this.Controls.Add(this.cbOptions);
             this.Controls.Add(this.btnShow);

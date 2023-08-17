@@ -1,0 +1,22 @@
+
+            switch (inputFileExtension)
+            {
+                case ".pdf":
+                    openPdfFile(inputFilePath);
+                    break;
+                case ".txt":
+                    openTextFile(inputFilePath);
+                    break;
+                case ".docx":
+                    openWordFile(inputFilePath);
+                    break;
+                case ".doc":
+                    openWordFile(inputFilePath);
+                    break;
+                case ".enc":
+                    openEncryptedFile(inputFilePath);
+                    break;
+                default:
+                    MessageBox.Show("File type not matched!");
+                    break;
+            }

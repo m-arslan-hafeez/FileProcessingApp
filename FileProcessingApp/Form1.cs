@@ -8,6 +8,7 @@ using iTextSharp.text.pdf.parser;
 using Document = Microsoft.Office.Interop.Word.Document;
 using Path = System.IO.Path;
 using System.Runtime.InteropServices;
+using System.Drawing;
 
 namespace FileProcessingApp
 {
@@ -45,7 +46,7 @@ namespace FileProcessingApp
         public string file;
         public int user_key;
         public string user_text;
-        string text_result;
+        //string text_result;
         public static int cipher_key = 835294858;
 
         public frmMain()
@@ -315,28 +316,6 @@ namespace FileProcessingApp
                     }
                 }
             }
-
-            switch (inputFileExtension)
-            {
-                case ".pdf":
-                    openPdfFile(inputFilePath);
-                    break;
-                case ".txt":
-                    openTextFile(inputFilePath);
-                    break;
-                case ".docx":
-                    openWordFile(inputFilePath);
-                    break;
-                case ".doc":
-                    openWordFile(inputFilePath);
-                    break;
-                case ".enc":
-                    openEncryptedFile(inputFilePath);
-                    break;
-                default:
-                    MessageBox.Show("File type not matched!");
-                    break;
-            }
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -469,6 +448,9 @@ namespace FileProcessingApp
 
         private void btnShow_Click(object sender, EventArgs e)
         {
+            this.Size = new Size(630, 657);
+            rtbShow.Visible = true;
+            rtbShow.Size = new Size(562, 260);
             openEncryptedFile(outputFilePath);
         }
 
