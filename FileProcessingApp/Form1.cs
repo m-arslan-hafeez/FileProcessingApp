@@ -296,7 +296,7 @@ namespace FileProcessingApp
                 {
                     string dllPath = openFileDialog.FileName;
                     loaded_library_handle = LoadLibrary(dllPath);
-
+                    library = dllPath;
                     if (loaded_library_handle != IntPtr.Zero)
                     {
                         tbLibrary.Text = dllPath;
@@ -307,14 +307,12 @@ namespace FileProcessingApp
                     }
                 }
             }
+            lblLibrary.Visible = false;
+            tbLibrary.Visible = false;
+            btnLibrary.Visible = false;
         }
         private void btnFile_Click(object sender, EventArgs e)
         {
-            tbLibrary.Clear();
-            tbFile.Clear();
-            tbKey.Clear();
-            tbInResultTab.Clear();
-            tbInOutputTab.Clear();
             using (var openFileDialog = new OpenFileDialog())
             {
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -550,10 +548,13 @@ namespace FileProcessingApp
             btnShow.Visible = false;
             tbInOutputTab.Clear();
             tbInResultTab.Clear();
+            tbLibrary.Clear();
+            lblLibrary.Visible = true;
+            tbLibrary.Visible = true;
+            btnLibrary.Visible = true;
         }
         private void btnClear_Click(object sender, EventArgs e)
         {
-            tbLibrary.Clear();
             tbFile.Clear();
             tbText.Clear();
             tbKey.Clear();

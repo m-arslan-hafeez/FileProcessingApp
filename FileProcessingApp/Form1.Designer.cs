@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tbLibrary = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblLibrary = new System.Windows.Forms.Label();
             this.tbFile = new System.Windows.Forms.TextBox();
             this.lblText = new System.Windows.Forms.Label();
             this.tbText = new System.Windows.Forms.TextBox();
@@ -69,15 +69,15 @@
             this.tbLibrary.Size = new System.Drawing.Size(416, 21);
             this.tbLibrary.TabIndex = 0;
             // 
-            // label1
+            // lblLibrary
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 22);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Import Library:";
+            this.lblLibrary.AutoSize = true;
+            this.lblLibrary.Location = new System.Drawing.Point(17, 22);
+            this.lblLibrary.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLibrary.Name = "lblLibrary";
+            this.lblLibrary.Size = new System.Drawing.Size(100, 15);
+            this.lblLibrary.TabIndex = 2;
+            this.lblLibrary.Text = "Import Library:";
             // 
             // tbFile
             // 
@@ -339,20 +339,20 @@
             // 
             // tpOutputTab
             // 
+            this.tpOutputTab.BackColor = System.Drawing.SystemColors.Window;
             this.tpOutputTab.Location = new System.Drawing.Point(4, 24);
             this.tpOutputTab.Name = "tpOutputTab";
             this.tpOutputTab.Padding = new System.Windows.Forms.Padding(3);
             this.tpOutputTab.Size = new System.Drawing.Size(566, 179);
             this.tpOutputTab.TabIndex = 0;
             this.tpOutputTab.Text = "Output";
-            this.tpOutputTab.UseVisualStyleBackColor = true;
             // 
             // tpResultTab
             // 
             this.tpResultTab.Location = new System.Drawing.Point(4, 24);
             this.tpResultTab.Name = "tpResultTab";
             this.tpResultTab.Padding = new System.Windows.Forms.Padding(3);
-            this.tpResultTab.Size = new System.Drawing.Size(494, 156);
+            this.tpResultTab.Size = new System.Drawing.Size(566, 179);
             this.tpResultTab.TabIndex = 1;
             this.tpResultTab.Text = "Result";
             this.tpResultTab.UseVisualStyleBackColor = true;
@@ -373,6 +373,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(614, 507);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControlShow);
@@ -396,7 +397,7 @@
             this.Controls.Add(this.lblFile);
             this.Controls.Add(this.btnFile);
             this.Controls.Add(this.tbFile);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblLibrary);
             this.Controls.Add(this.btnLibrary);
             this.Controls.Add(this.tbLibrary);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -406,7 +407,7 @@
             this.Name = "frmMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Main Form";
+            this.Text = "File Processing Application";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Click += new System.EventHandler(this.frmMain_Load);
@@ -420,7 +421,7 @@
 
         private System.Windows.Forms.TextBox tbLibrary;
         private System.Windows.Forms.Button btnLibrary;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblLibrary;
         private System.Windows.Forms.Button btnFile;
         private System.Windows.Forms.TextBox tbFile;
         private System.Windows.Forms.Label lblText;
