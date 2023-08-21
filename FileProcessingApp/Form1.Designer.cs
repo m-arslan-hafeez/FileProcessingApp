@@ -52,6 +52,11 @@
             this.btnClearAll = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.tabControlShow = new System.Windows.Forms.TabControl();
+            this.tpOutputTab = new System.Windows.Forms.TabPage();
+            this.tpResultTab = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.tabControlShow.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbLibrary
@@ -128,7 +133,7 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(410, 251);
+            this.btnExport.Location = new System.Drawing.Point(410, 227);
             this.btnExport.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(67, 27);
@@ -188,7 +193,7 @@
             // lblOutputFile
             // 
             this.lblOutputFile.AutoSize = true;
-            this.lblOutputFile.Location = new System.Drawing.Point(17, 229);
+            this.lblOutputFile.Location = new System.Drawing.Point(17, 132);
             this.lblOutputFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOutputFile.Name = "lblOutputFile";
             this.lblOutputFile.Size = new System.Drawing.Size(81, 15);
@@ -199,7 +204,7 @@
             // tbOutputFile
             // 
             this.tbOutputFile.BackColor = System.Drawing.SystemColors.Window;
-            this.tbOutputFile.Location = new System.Drawing.Point(136, 222);
+            this.tbOutputFile.Location = new System.Drawing.Point(136, 132);
             this.tbOutputFile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbOutputFile.Name = "tbOutputFile";
             this.tbOutputFile.Size = new System.Drawing.Size(416, 21);
@@ -208,7 +213,7 @@
             // 
             // btnShow
             // 
-            this.btnShow.Location = new System.Drawing.Point(485, 251);
+            this.btnShow.Location = new System.Drawing.Point(485, 227);
             this.btnShow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(67, 27);
@@ -253,7 +258,7 @@
             // btnSaveOutput
             // 
             this.btnSaveOutput.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveOutput.Image")));
-            this.btnSaveOutput.Location = new System.Drawing.Point(561, 216);
+            this.btnSaveOutput.Location = new System.Drawing.Point(561, 126);
             this.btnSaveOutput.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveOutput.Name = "btnSaveOutput";
             this.btnSaveOutput.Padding = new System.Windows.Forms.Padding(0, 0, 7, 0);
@@ -288,7 +293,7 @@
             // 
             // btnClearAll
             // 
-            this.btnClearAll.Location = new System.Drawing.Point(20, 251);
+            this.btnClearAll.Location = new System.Drawing.Point(20, 227);
             this.btnClearAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClearAll.Name = "btnClearAll";
             this.btnClearAll.Size = new System.Drawing.Size(97, 27);
@@ -300,7 +305,7 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(136, 251);
+            this.btnRefresh.Location = new System.Drawing.Point(136, 227);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(73, 27);
@@ -311,7 +316,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(217, 251);
+            this.btnClear.Location = new System.Drawing.Point(217, 227);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(74, 27);
@@ -320,13 +325,57 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // tabControlShow
+            // 
+            this.tabControlShow.Controls.Add(this.tpOutputTab);
+            this.tabControlShow.Controls.Add(this.tpResultTab);
+            this.tabControlShow.Location = new System.Drawing.Point(20, 269);
+            this.tabControlShow.Multiline = true;
+            this.tabControlShow.Name = "tabControlShow";
+            this.tabControlShow.SelectedIndex = 0;
+            this.tabControlShow.Size = new System.Drawing.Size(574, 207);
+            this.tabControlShow.TabIndex = 27;
+            this.tabControlShow.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlShow_Selected);
+            // 
+            // tpOutputTab
+            // 
+            this.tpOutputTab.Location = new System.Drawing.Point(4, 24);
+            this.tpOutputTab.Name = "tpOutputTab";
+            this.tpOutputTab.Padding = new System.Windows.Forms.Padding(3);
+            this.tpOutputTab.Size = new System.Drawing.Size(566, 179);
+            this.tpOutputTab.TabIndex = 0;
+            this.tpOutputTab.Text = "Output";
+            this.tpOutputTab.UseVisualStyleBackColor = true;
+            // 
+            // tpResultTab
+            // 
+            this.tpResultTab.Location = new System.Drawing.Point(4, 24);
+            this.tpResultTab.Name = "tpResultTab";
+            this.tpResultTab.Padding = new System.Windows.Forms.Padding(3);
+            this.tpResultTab.Size = new System.Drawing.Size(494, 156);
+            this.tpResultTab.TabIndex = 1;
+            this.tpResultTab.Text = "Result";
+            this.tpResultTab.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(304, 227);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 27);
+            this.button1.TabIndex = 28;
+            this.button1.Text = "Rotate";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_ClickAsync);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.ClientSize = new System.Drawing.Size(614, 432);
+            this.ClientSize = new System.Drawing.Size(614, 507);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.tabControlShow);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.chBoxShow);
@@ -361,6 +410,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Click += new System.EventHandler(this.frmMain_Load);
+            this.tabControlShow.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -391,6 +441,10 @@
         private System.Windows.Forms.Button btnClearAll;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.TabControl tabControlShow;
+        private System.Windows.Forms.TabPage tpOutputTab;
+        private System.Windows.Forms.TabPage tpResultTab;
+        private System.Windows.Forms.Button button1;
     }
 }
 
